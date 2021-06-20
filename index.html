@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual ATM Machine</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js"></script>
+</head>
+<body>
+   <div class="container">
+       <div class="atm">
+           <div class="cash">
+               <div id="grid1"><h1>ATM</h1></div>
+               <div id="grid2">
+                   <!-- Welcome page -->
+                   <div class="display" id="mainpage">
+                       <div class="leftbuttons" id="displaybuttons">
+                           <button></button>
+                           <button></button>
+                           <button></button>
+                           <button></button>
+                       </div>
+                       <div class="display_image">
+                           <h3>State Bank</h3>
+                           <p>Please insert your atm card</p>
+                       </div>
+                       <div class="rightbuttons" id="displaybuttons">
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                    </div>
+                   </div>
+
+                    <!-- Pin page -->
+                   <div class="display" id="pinpage">
+                    <div class="leftbuttons" id="displaybuttons">
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                    </div>
+                    <div class="display_image">
+                        <p>Please enter your Pin:</p>
+                        <input type="password" name="pin" maxlength="4" id="pass">                        
+                    </div>
+                    <div class="rightbuttons" id="displaybuttons">
+                     <button></button>
+                     <button></button>
+                     <button></button>
+                     <button></button>
+                 </div>
+                </div>
+
+                <!--Main page of Balance withdraw deposit and transfer-->
+                <div class="display" id="fundpage">
+                    <div class="leftbuttons" id="displaybuttons">
+                        <button></button>
+                        <button onclick="showBalance()"></button>
+                        <button onclick="withdrawpage()"></button>
+                        <button onclick="pinchangepage()"></button>
+                    </div>
+                    <div class="display_image" id="fundmain">
+                        <h3>State Bank</h3>
+                        <button onclick="showBalance()">Balance</button>
+                        <button onclick="deposit()">Deposit</button>
+                        <button onclick="withdrawpage()">Withdraw</button>
+                        <button onclick="transfer()">Transfer</button>
+                        <button onclick="pinchangepage()">Pin</button>
+                        <button onclick="gotohome()">Cancel</button>
+                    </div>
+                    
+                    <div class="rightbuttons" id="displaybuttons">
+                     <button></button>
+                     <button onclick="deposit()"></button>
+                     <button onclick="transfer()"></button>
+                     <button onclick="gotohome()"></button>
+                 </div>
+                </div>
+
+                <!--Account Balance Page-->
+
+                <div id="fundbalance">
+                    <div class="leftbuttons" id="displaybuttons">
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button  onclick="printreceipt()"></button>
+                    </div>
+                    <div class="display_image">
+                        <h3>State Bank</h3>
+                        <p id="Bal">Your Main Account Balance Is ₹ <span id="balAmount"></span></p>                        
+                        <div id="receiptaccept">
+                            <p>Do you want a receipt</p>
+                            <button class="yesbutton" onclick="printreceipt()">Yes</button>
+                            <button class="nobutton" onclick="noreceipt()">No</button>
+                        </div>
+                    </div>
+                    <div class="rightbuttons" id="displaybuttons">
+                     <button></button>
+                     <button></button>
+                     <button></button>
+                     <button onclick="noreceipt()"></button>
+                 </div>
+                </div> 
+
+
+                <!-- Deposit Page -->
+
+                
+                <div class="display" id="Depositpage">
+                    <div class="leftbuttons" id="displaybuttons">
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button onclick="depositamount()"></button>
+                    </div>
+                    <div class="display_image">
+                        <p>Enter the amount you want to deposit and insert amount</p>
+                        <input type="number" id="depositmoney"><br>
+                        <button class="yesbutton" onclick="depositamount()">Yes</button>
+                        <button class="nobutton" onclick="cancelDeposit()">Cancel</button>
+                    </div>
+                    <div class="rightbuttons" id="displaybuttons">
+                    <button></button>
+                    <button></button>
+                    <button></button>
+                    <button onclick="cancelDeposit()"></button>
+                </div>
+                </div>
+
+                <!-- Withdraw Page -->
+
+                
+                    <div class="display" id="Withdrawpage">
+                        <div class="leftbuttons" id="displaybuttons">
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                            <button onclick="withdrawamount()"></button>
+                        </div>
+                        <div class="display_image">
+                            <h4>Enter amount to withdraw</h4>                        
+                            <input type="number" id="withdraw">
+                            <p>Are you sure</p>
+                            <button class="yesbutton" onclick="withdrawamount()">Yes</button>
+                            <button class="nobutton" onclick="cancelWithdraw()">No</button>
+                        </div>
+                        <div class="rightbuttons" id="displaybuttons">
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button onclick="cancelWithdraw()"></button>
+                    </div>
+                    </div>
+
+                    <!-- Tranfer Page -->
+
+                    <div class="display" id="transferpage">
+                        <div class="leftbuttons" id="displaybuttons">
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                            <button onclick="tranferamount()"></button>
+                        </div>
+                        <div class="display_image" id="transferto">
+                            <h4>Enter the transfer to account number</h4>
+                            <input type="password" maxlength="10" id="accountnumber">
+                            <br>
+                            <p>Are you sure</p>
+                            <button class="yesbutton" onclick="tranferamount()">Yes</button>
+                            <button class="nobutton" onclick="canceltransfer()">Cancel</button>
+                        </div>
+                        <div class="rightbuttons" id="displaybuttons">
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button onclick="canceltranfer()"></button>
+                    </div>
+                    </div>
+                    
+                    <!-- Page to enter the amount which has to be transfered -->
+
+                    <div class="display" id="transferamount">
+                        <div class="leftbuttons" id="displaybuttons">
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                            <button onclick="transfernow()"></button>
+                        </div>
+                        <div class="display_image" id="transferto">
+                            <h4>Enter the amount to transfer</h4>
+                            <input type="number" maxlength="10" id="amount_to_transfer">
+                            <br>
+                            <button class="yesbutton" onclick="transfernow()">Transfer</button>                            
+                        </div>
+                        <div class="rightbuttons" id="displaybuttons">
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button onclick="transfernow()"></button>
+                    </div>
+                    </div>
+
+                    <!-- Asking for pin change confirmation page -->
+                    <div class="display" id="pinchangepage">
+                        <div class="leftbuttons" id="displaybuttons">
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                            <button onclick="changepin()"></button>
+                        </div>
+                        <div class="display_image">
+                            <h3>State Bank</h3>
+                            <p>Are you sure to change your pin</p>
+                            <button class="yesbutton" onclick="changepin()">Yes</button>
+                            <button class="nobutton" onclick="nopinchange()">No</button>
+                        </div>
+                        <div class="rightbuttons" id="displaybuttons">
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                        <button onclick="nopinchange()"></button>
+                    </div>
+                    </div>
+                     
+                    <!-- Pin changing page -->
+                    <div class="display" id="newpinpage">
+                        <div class="leftbuttons" id="displaybuttons">
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                            <button></button>
+                        </div>
+                        <div class="display_image">
+                            <h3>State Bank</h3>
+                            <p>Enter your new pin</p>
+                            <input type="number" maxlength="4" id="newpin">
+                            <button class="yesbutton" onclick="newpin()">Change</button>
+                        </div>
+                        <div class="rightbuttons" id="displaybuttons">
+                        <button></button>
+                        <button></button>
+                        <button onclick="newpin()"></button>
+                        <button></button>
+                    </div>
+                    </div>
+                    <!-- Cash Withdraw section -->
+                   <div class="withdraw">
+                       <div class="container">
+                           <hr class="hr1">
+                           <hr class="hr2">                
+                       </div> 
+                       <div class="cash" id="cashwithdraw">
+                           <img src="./assets/cash.jpg" alt="" width="100px" height="40px" onclick="takecash()">
+                       </div>                   
+                   </div>
+                   
+                    <!-- Atm inserting and receipt receiving section -->
+                   <div class="insertatm">
+
+                       <div class="cardcontainer">
+                        <p class="cardpara">ATM Card</p>
+                        <hr>
+                        <div class="cardinsert">                         
+                        </div>  
+                       </div>
+
+                       <div class="cardimg"><img src="./assets/atmcard.jpg" id="atmcard" alt="" onclick="scancard()"></div>                       
+
+                       <div class="receiptcontainer">
+                        <p class="receiptpara">Receipt</p>
+                        <div class="receipt">
+                            <div>
+                             <hr>                               
+                            </div>
+                        </div>
+                       </div>         
+                       <div><img src="./assets/receipt.jpg" id="receipt" alt="" onclick="takereceipt()"></div>
+                   </div>
+               </div>
+               
+
+               <!-- Blank Section -->
+               <div id="grid3"></div>
+
+               <!-- Section with pin buttons -->
+               <div class="pin" id="pin">
+                <button class="btn" onclick="addto(this.id)" id="1" value="1">1</button>
+                <button class="btn" onclick="addto(this.id)" id="2" value="2">2</button>
+                <button class="btn" onclick="addto(this.id)" id="3" value="3">3</button>
+                <button class="btn" onclick="addto(this.id)" id="4" value="4">4</button>
+                <button class="btn" onclick="addto(this.id)" id="5" value="5">5</button>
+                <button class="btn" onclick="addto(this.id)" id="6" value="6">6</button>
+                <button class="btn" onclick="addto(this.id)" id="7" value="7">7</button>
+                <button class="btn" onclick="addto(this.id)" id="8" value="8">8</button>
+                <button class="btn" onclick="addto(this.id)" id="9" value="9">9</button>
+                <button class="btn" onclick="addto(this.id)" id="0" value="0">0</button>
+                <button class="btn" id="submit" type="submit" onclick="submitpin()">Enter</button>
+                <button class="btn" id="clear" onclick="clearpin()">Clear</button>
+               </div>
+           </div>
+       </div>
+   </div> 
+</body>
+</html>
